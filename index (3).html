@@ -1,0 +1,153 @@
+DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Student Resume</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #eaeff1;
+            margin: 0;
+            padding: 20px;
+        }
+        .resume {
+            width: 794px;
+            height: 1123px;
+            background: white;
+            padding: 30px;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        .header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #2c3e50;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        .header p {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        .section {
+            margin-top: 15px;
+            text-align: left;
+        }
+        .section h2 {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 5px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        .section ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 14px;
+        }
+        .section ul li {
+            background: #ecf0f1;
+            padding: 8px;
+            margin: 4px 0;
+            border-radius: 5px;
+        }
+        .options {
+            margin-top: 15px;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .download-btn:hover {
+            background: linear-gradient(135deg, #1a252f, #2c3e50);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+ <script>
+  function downloadResume() {
+    // Hide the download button before capturing the resume
+    const downloadButton = document.querySelector(".download-btn");
+    downloadButton.style.display = "none";
+
+    html2canvas(document.querySelector(".resume")).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF("p", "mm", "a4");
+        const imgWidth = 210; // A4 width in mm
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+        // Restore the button after generating the PDF
+        downloadButton.style.display = "block";
+
+        // Trigger download
+        pdf.save("Raffiq Ahamed_Resume.pdf");
+    });
+}
+</script>
+</head>
+<body>
+    <div class="resume">
+        <div class="header">
+            <img src=""alt="Profile Image">
+            <h1>M.Raffiq Ahamed</h1>
+            <p>Computer Application Student</p>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <p>Bachelor of Computer Application – Madras University</p>
+        </div>
+
+        <div class="section">
+            <h2>About Me</h2>
+            <p>I'm an <b>Computer Application student</b> passionate about exploring BCA, machine learning, and Computer Application. I work on coding projects, BCA models, and research the latest advancements in the field.</p>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <ul>
+                <li>Machine Learning</li>
+                <li>Java</li>
+                <li>Python</li>
+                <li>Prolog</li>
+                <li>Front-End Development</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <p>Music App</p>
+            <p>Notification Tone App</p>
+        </div>
+
+        <div class="section">
+            <h2>Contact</h2>
+            <p>Email: raffiqahamed115@gmail.com</p>
+        </div>
+
+        <div class="options">
+            <button class="download-btn" onclick="downloadResume()">Download Resume</button>
+        </div>
+    </div>
+</body>
+</html>
